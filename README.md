@@ -110,7 +110,7 @@ pixi run coppelia
 Open the scene:
 
 ```text
-/Users/samuelemoranzoni/Desktop/usi/robotics/lab/project/scenes/safe_lane_selection_scene.ttt
+/Users/samuelemoranzoni/Desktop/usi/robotics/lab/project/scenes/safe_lane_selection_scene_with_red_and_green_cars.ttt
 ```
 
 Before pressing Play:
@@ -118,6 +118,7 @@ Before pressing Play:
 - Enable Real-time mode in the CoppeliaSim Simulation menu.
 - Make sure the RoboMaster object is named `/rm0`.
 - Make sure the scene contains the world pose publisher script.
+
 
 ## Updating the Scene with Red and Green Cars
 
