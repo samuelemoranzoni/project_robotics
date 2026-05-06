@@ -1,0 +1,16 @@
+<launch>
+  <arg name="name" default="rm0"/>
+  <arg name="scenario_level" default="manual"/>
+  <arg name="metrics_path" default="logs/guardian_drive_metrics.csv"/>
+
+  <include file="$(find-pkg-share autonomous_guardian_drive)/launch/ep_tof_camera.launch.xml">
+    <arg name="name" value="$(var name)"/>
+  </include>
+
+  <include file="$(find-pkg-share autonomous_guardian_drive)/launch/guardian_controller.launch.py">
+    <arg name="name" value="$(var name)"/>
+    <arg name="scenario_level" value="$(var scenario_level)"/>
+    <arg name="metrics_path" value="$(var metrics_path)"/>
+  </include>
+</launch>
+

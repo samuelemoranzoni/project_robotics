@@ -1,0 +1,52 @@
+/**:
+  ros__parameters:
+    image_topic: camera/image_color
+    cmd_vel_topic: cmd_vel
+    led_color_topic: leds/color
+    led_effect_topic: leds/effect
+    events_topic: guardian/events
+    debug_image_topic: guardian/debug_image
+    debug_image: true
+
+    # ToF configuration matching the 4-sensor RoboMaster EP launch file.
+    range_topics: ["range_0", "range_1", "range_2", "range_3"]
+    left_range_topics: ["range_2", "range_3"]
+    right_range_topics: ["range_0", "range_1"]
+
+    # Road perception.
+    lane_color_mode: white_or_yellow
+    lane_roi_top: 0.56
+    lane_min_pixels: 120
+    lane_kp: 1.55
+    lane_confidence_slow_threshold: 0.22
+
+    # ArUco IDs used by scripts/create_guardian_scene.lua.
+    enable_aruco: true
+    aruco_dictionary: DICT_4X4_50
+    intruder_ids: [11, 12, 13]
+    stop_sign_ids: [30]
+    goal_ids: [99]
+
+    # Motion and safety.
+    base_speed: 0.22
+    caution_speed: 0.10
+    search_turn_speed: 0.35
+    max_turn_speed: 1.15
+    avoidance_gain: 0.85
+    caution_distance: 1.00
+    stop_distance: 0.46
+    emergency_distance: 0.28
+    intruder_caution_area: 0.006
+    intruder_stop_area: 0.030
+    goal_stop_area: 0.020
+    stop_sign_area: 0.014
+    stop_sign_hold_seconds: 2.0
+    emergency_hold_seconds: 2.5
+    image_timeout_seconds: 1.0
+    intruder_memory_seconds: 1.2
+
+    # Changed from the launch file for easy/medium/incident experiments.
+    scenario_level: manual
+    metrics_path: logs/guardian_drive_metrics.csv
+    control_period: 0.10
+

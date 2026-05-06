@@ -1,0 +1,17 @@
+<launch>
+  <arg name="name" default="rm0"/>
+  <arg name="use_lateral_velocity" default="false"/>
+  <arg name="enable_object_detection" default="true"/>
+  <arg name="enable_safe_lane_selection" default="false"/>
+
+  <include file="$(find-pkg-share safe_lane_selection)/launch/rm_camera.launch.xml">
+    <arg name="name" value="$(var name)"/>
+  </include>
+
+  <include file="$(find-pkg-share safe_lane_selection)/launch/safe_lane_controller.launch.py">
+    <arg name="name" value="$(var name)"/>
+    <arg name="use_lateral_velocity" value="$(var use_lateral_velocity)"/>
+    <arg name="enable_object_detection" value="$(var enable_object_detection)"/>
+    <arg name="enable_safe_lane_selection" value="$(var enable_safe_lane_selection)"/>
+  </include>
+</launch>

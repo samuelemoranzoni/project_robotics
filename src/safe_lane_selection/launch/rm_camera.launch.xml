@@ -1,0 +1,19 @@
+<launch>
+  <arg name="name" default="rm0"/>
+
+  <include file="$(find-pkg-share robomaster_ros)/launch/main.launch">
+    <arg name="model" value="ep"/>
+    <arg name="name" value="$(var name)"/>
+    <arg name="camera" value="true"/>
+    <arg name="video_raw" value="1"/>
+    <arg name="video_h264" value="0"/>
+    <arg name="video_ffmpeg" value="0"/>
+    <arg name="video_resolution" value="360"/>
+    <arg name="led" value="true"/>
+    <arg name="tof_0" value="false"/>
+    <arg name="tof_1" value="false"/>
+    <arg name="tof_2" value="false"/>
+    <arg name="tof_3" value="false"/>
+  </include>
+</launch>
+

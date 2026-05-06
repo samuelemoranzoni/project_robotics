@@ -1,0 +1,90 @@
+/**:
+  ros__parameters:
+    image_topic: camera/image_color
+    odom_topic: odom
+    world_pose_topic: world_pose
+    cmd_vel_topic: cmd_vel
+    selected_lane_topic: safe_lane/selected_lane
+    ego_lane_topic: safe_lane/ego_lane
+    status_topic: safe_lane/status
+    led_topic: leds/color
+    debug_image_topic: safe_lane/debug_image
+    debug_image: true
+
+    # Camera lane perception.
+    lane_roi_top: 0.50
+    lane_min_line_length: 14
+    lane_max_line_gap: 45
+    lane_cluster_px: 18
+    min_lane_width: 0.08
+    max_lane_width: 0.95
+    # Temporal stabilization for the ego-lane.
+    # ego_track_alpha = how fast the smoothed estimate follows new frames
+    #   (0.30 = slow, sticky; 0.6 = quick).
+    # ego_track_max_jump = max normalized image-x jump per frame that we still
+    #   consider as "same lane". Bigger jumps are ignored for a frame.
+    ego_track_alpha: 0.18
+    ego_track_max_jump: 0.14
+    # Physical ego-lane id from localization. The visual detector still drives
+    # the steering target, but the published/debug "lane" is anchored to the
+    # scene coordinates so it does not change when one dashed segment disappears
+    # for a frame.
+    use_localization_ego_lane: true
+    use_odom_lane_fallback: false
+    world_lane_centers_y: [-1.66, -0.65, 0.65, 1.66]
+    world_lane_boundaries_y: [-2.02, -1.30, 0.0, 1.30, 2.02]
+    localization_lane_hysteresis_m: 0.0
+
+    # Other vehicles and obstacles. Detection uses color segmentation plus optional ArUco.
+    # cv2.aruco segfaults on the current macOS/Pixi OpenCV build, so the
+    # intermediate obstacle detector uses color/shape segmentation instead.
+    enable_aruco: false
+    aruco_dictionary: DICT_4X4_50
+    car_marker_ids: [21, 22, 23]
+    obstacle_marker_ids: [31, 32, 33]
+    min_object_area: 0.001
+    enable_object_detection: true
+    # Intermediate milestone: detect and report obstacles, but do not stop the
+    # robot from this signal yet. Set true when testing collision braking.
+    enable_obstacle_braking: false
+
+    # Lane selection scoring. Disabled for the intermediate milestone:
+    # the robot only identifies and follows its ego lane.
+    enable_safe_lane_selection: false
+    switch_penalty: 0.35
+    object_lane_penalty: 2.5
+    adjacent_lane_penalty: 0.35
+    prefer_center_weight: 0.25
+
+    # Controller. RoboMaster can use angular steering only, or lateral velocity too.
+    # Crawl speed during the perception-tuning phase: we want to verify ego-lane
+    # identification and orientation BEFORE driving aggressively.
+    base_speed: 0.05
+    caution_speed: 0.03
+    search_turn_speed: 0.0
+    lane_kp: 0.30
+    # Orientation_kp temporarily 0: the orientation estimate is still flaky on
+    # the right lane, will re-enable once the heading filter is tightened.
+    orientation_kp: 0.0
+    lateral_kp: 0.10
+    max_angular_speed: 0.30
+    max_lateral_speed: 0.05
+    use_world_lane_control: true
+    world_lane_kp: 0.22
+    # Camera-frame x-coordinate where the robot's longitudinal axis projects.
+    # The RoboMaster gimbal points slightly to the right of the chassis forward
+    # axis, so when the robot is perfectly centered in its lane the lane center
+    # actually appears around x=0.60 in the image, not 0.50.
+    image_center_x: 0.60
+    # Orientation reading offset (deg) due to the same camera yaw bias. When the
+    # robot is aligned with a straight lane, the perception still reports about
+    # +45 deg (boundaries on both sides of the lane lean to the same side in
+    # image because the camera looks right of the chassis forward axis). We
+    # subtract this baseline before applying orientation_kp.
+    orientation_offset_deg: 45.0
+    use_lateral_velocity: false
+    selected_lane_risk_slow: 0.55
+    selected_lane_risk_stop: 1.0
+    orientation_ok_deg: 10.0
+    image_timeout: 1.0
+    watchdog_period: 0.2
