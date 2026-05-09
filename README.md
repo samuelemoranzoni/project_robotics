@@ -8,7 +8,7 @@ This project implements an autonomous-driving inspired RoboMaster EP simulation 
 2. Orientation understanding: estimate whether the robot is aligned with the road direction using the lane geometry.
 3. Camera-based object detection: detect red and green cars through the RoboMaster camera.
 
-Safe lane selection and full obstacle-aware lane changing are prepared in the codebase but are not the main validated result yet.
+
 
 ## Repository Layout
 
